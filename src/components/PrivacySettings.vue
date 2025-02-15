@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { useSettings } from '@/composables/useSettings';
+import useNotifications from '@/composables/useNotifications';
 
 const { privacy } = useSettings();
+const { addNotification } = useNotifications();
+
+const save = () => {
+  addNotification('Privacy Settings were saved successfully!');
+};
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl mb-4">Privacy</h2>
 
-    <form class="space-y-4 mx-auto w-full max-w-2xl">
+    <form class="space-y-4 mx-auto w-full max-w-2xl" @submit.prevent="save">
       <div class="flex items-center space-x-2">
         <input type="checkbox" v-model="privacy.searchEngineIndexing" />
         <label>Search Engine Indexing</label>
